@@ -1,6 +1,6 @@
 # Installation & Testing Guide
 
-## Shamelessly Vibe-Coded Form Filler
+## Lorem Ipsform
 
 One Manifest V3 package runs in both **Chrome** (and other Chromium browsers) and **Firefox 140+**.
 
@@ -12,7 +12,7 @@ One Manifest V3 package runs in both **Chrome** (and other Chromium browsers) an
 
 This creates:
 - `build/extension/`: the unpacked extension
-- `build/shamelessly-vibe-coded-form-filler.zip`: the same files, for the Chrome Web Store or addons.mozilla.org
+- `build/lorem-ipsform.zip`: the same files, for the Chrome Web Store or addons.mozilla.org
 
 ## Chrome
 

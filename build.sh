@@ -1,12 +1,12 @@
 #!/bin/bash
-# Build script for Shamelessly Vibe-Coded Form Filler.
+# Build script for Lorem Ipsform.
 # One Manifest V3 package works in both Chrome and Firefox.
 set -euo pipefail
 cd "$(dirname "$0")"
 
 FILES=(manifest.json popup.html popup.js content.js icon16.png icon48.png icon128.png LICENSE README.md)
 OUT=build/extension
-ZIP=build/shamelessly-vibe-coded-form-filler.zip
+ZIP=build/lorem-ipsform.zip
 
 rm -rf build
 mkdir -p "$OUT"

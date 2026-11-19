@@ -1,4 +1,4 @@
-// Shamelessly Vibe-Coded Form Filler popup script.
+// Lorem Ipsform popup script.
 //
 // Chrome and Firefox both run this as a Manifest V3 extension with
 // promise-based APIs, so no per-browser branches are needed.

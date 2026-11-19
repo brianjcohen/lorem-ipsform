@@ -1,4 +1,4 @@
-// Shamelessly Vibe-Coded Form Filler content script.
+// Lorem Ipsform content script.
 //
 // The popup injects this file into the active tab on demand (see popup.js) and
 // then calls methods on globalThis.__formFiller. Injecting it more than once is
@@ -598,7 +598,7 @@ class RandomFormFiller {
   addHighlightBox(target, padding, color) {
     const rect = target.getBoundingClientRect();
     const box = document.createElement('div');
-    box.className = 'form-filler-highlight';
+    box.className = 'lorem-ipsform-highlight';
     box.style.cssText = `
       position: absolute;
       top: ${rect.top + window.scrollY - padding}px;
@@ -632,7 +632,7 @@ class RandomFormFiller {
   }
 
   removeHighlight() {
-    document.querySelectorAll('.form-filler-highlight').forEach((el) => el.remove());
+    document.querySelectorAll('.lorem-ipsform-highlight').forEach((el) => el.remove());
   }
 }
 

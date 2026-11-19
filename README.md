@@ -1,4 +1,6 @@
-# Shamelessly Vibe-Coded Form Filler
+# Lorem Ipsform
+
+*Lorem ipsum, but for forms.*
 
 A browser extension for Chrome and Firefox that automatically fills web forms with random data. Perfect for testing, development, and quickly filling out forms without having to manually enter data.
 
@@ -33,7 +35,7 @@ A browser extension for Chrome and Firefox that automatically fills web forms wi
 ## Usage
 
 1. **Navigate to any webpage with forms**
-2. **Click the Shamelessly Vibe-Coded Form Filler extension icon** in your Chrome toolbar
+2. **Click the Lorem Ipsform icon** in your browser toolbar
 3. **Choose your options**:
    - ✅ Fill text inputs & textareas
    - ✅ Fill dropdown menus  
@@ -81,7 +83,7 @@ Number fields respect `min`, `max` and `step`, and text never exceeds `maxlength
 ## Files Structure
 
 ```
-my-form-filler/
+lorem-ipsform/
 ├── manifest.json       # Extension configuration (Manifest V3, Chrome and Firefox)
 ├── build.sh            # Builds build/extension/ and a zip
 ├── content.js          # Main form-filling logic
