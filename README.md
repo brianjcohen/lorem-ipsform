@@ -4,6 +4,8 @@
 
 A browser extension for Chrome and Firefox that automatically fills web forms with random data. Perfect for testing, development, and quickly filling out forms without having to manually enter data.
 
+It's also shamelessly vibe-coded: written by AI models, first an older one, then reviewed and rebuilt with Claude. Read the code before you trust it with anything important.
+
 ## Features
 
 - 🎯 **Smart Text Generation**: Automatically detects field types (email, phone, name, etc.) and generates appropriate content
