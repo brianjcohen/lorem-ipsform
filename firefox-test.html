@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Firefox Extension Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        form {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        input, select, textarea {
+            margin: 5px 0;
+            padding: 8px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h2>🦊 Firefox Extension Test Page</h2>
+        <p><strong>URL:</strong> <span id="currentUrl"></span></p>
+        <p><strong>Protocol:</strong> <span id="protocol"></span></p>
+        <p>This page should work with the extension in Firefox.</p>
+    </div>
+
+    <form id="testForm">
+        <h3>Test Form</h3>
+        <div>
+            <label>Name: <input type="text" name="name" placeholder="Enter your name"></label>
+        </div>
+        <div>
+            <label>Email: <input type="email" name="email" placeholder="Enter your email"></label>
+        </div>
+        <div>
+            <label>Age: <input type="number" name="age" placeholder="Age"></label>
+        </div>
+        <div>
+            <label>Country: 
+                <select name="country">
+                    <option value="">Select Country</option>
+                    <option value="us">United States</option>
+                    <option value="ca">Canada</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="de">Germany</option>
+                    <option value="fr">France</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label>Comments: <br>
+                <textarea name="comments" rows="3" cols="40" placeholder="Enter your comments"></textarea>
+            </label>
+        </div>
+        <div>
+            <label><input type="checkbox" name="newsletter"> Subscribe to newsletter</label>
+        </div>
+        <div>
+            <label><input type="radio" name="contact" value="email"> Contact by email</label><br>
+            <label><input type="radio" name="contact" value="phone"> Contact by phone</label>
+        </div>
+    </form>
+
+    <div>
+        <h3>🧪 Test Instructions</h3>
+        <ol>
+            <li>Click the extension icon in Firefox toolbar</li>
+            <li>Click "Fill Forms Now"</li>
+            <li>Check Firefox Browser Console (Ctrl+Shift+J) for debug messages</li>
+            <li>Look for messages starting with "Firefox:"</li>
+        </ol>
+    </div>
+
+    <script>
+        document.getElementById('currentUrl').textContent = window.location.href;
+        document.getElementById('protocol').textContent = window.location.protocol;
+        
+        // Log that the page is ready
+        console.log('🦊 Firefox test page loaded:', window.location.href);
+        console.log('🦊 Protocol:', window.location.protocol);
+        console.log('🦊 Ready for extension testing');
+    </script>
+</body>
+</html>

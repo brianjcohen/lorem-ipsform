@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sunglasses Icon Generator</title>
+</head>
+<body>
+    <canvas id="icon16" width="16" height="16"></canvas>
+    <canvas id="icon48" width="48" height="48"></canvas>
+    <canvas id="icon128" width="128" height="128"></canvas>
+    
+    <script>
+        function createIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Background - cool gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#2D3748');
+            gradient.addColorStop(1, '#1A202C');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Sunglasses frame
+            const centerX = size / 2;
+            const centerY = size / 2;
+            const frameWidth = size * 0.7;
+            const frameHeight = size * 0.35;
+            const lensRadius = frameHeight * 0.35;
+            const frameThickness = Math.max(1, size * 0.04);
+            
+            // Frame bridge (between lenses)
+            ctx.fillStyle = '#4A5568';
+            ctx.fillRect(centerX - frameWidth * 0.08, centerY - frameThickness/2, frameWidth * 0.16, frameThickness);
+            
+            // Left lens
+            ctx.fillStyle = '#2D3748'; // Dark frame
+            ctx.beginPath();
+            ctx.arc(centerX - frameWidth * 0.25, centerY, lensRadius + frameThickness, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            ctx.fillStyle = '#1A202C'; // Dark lens
+            ctx.beginPath();
+            ctx.arc(centerX - frameWidth * 0.25, centerY, lensRadius, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Right lens  
+            ctx.fillStyle = '#2D3748'; // Dark frame
+            ctx.beginPath();
+            ctx.arc(centerX + frameWidth * 0.25, centerY, lensRadius + frameThickness, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            ctx.fillStyle = '#1A202C'; // Dark lens
+            ctx.beginPath();
+            ctx.arc(centerX + frameWidth * 0.25, centerY, lensRadius, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Lens reflections/highlights
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            // Left lens highlight
+            ctx.beginPath();
+            ctx.arc(centerX - frameWidth * 0.25 - lensRadius * 0.3, centerY - lensRadius * 0.3, lensRadius * 0.25, 0, 2 * Math.PI);
+            ctx.fill();
+            // Right lens highlight
+            ctx.beginPath();
+            ctx.arc(centerX + frameWidth * 0.25 - lensRadius * 0.3, centerY - lensRadius * 0.3, lensRadius * 0.25, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Arms/temples
+            ctx.fillStyle = '#4A5568';
+            const armLength = size * 0.15;
+            const armThickness = frameThickness;
+            // Left arm
+            ctx.fillRect(centerX - frameWidth * 0.35 - armLength, centerY - armThickness/2, armLength, armThickness);
+            // Right arm
+            ctx.fillRect(centerX + frameWidth * 0.35, centerY - armThickness/2, armLength, armThickness);
+            
+            // Download link
+            const link = document.createElement('a');
+            link.download = `icon${size}.png`;
+            link.href = canvas.toDataURL();
+            link.textContent = `Download ${size}x${size} icon`;
+            link.style.display = 'block';
+            link.style.margin = '10px 0';
+            document.body.appendChild(link);
+        }
+        
+        createIcon('icon16', 16);
+        createIcon('icon48', 48);
+        createIcon('icon128', 128);
+    </script>
+</body>
+</html>

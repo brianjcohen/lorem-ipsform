@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Test - Form Filler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .hidden {
+            display: none;
+        }
+        .dynamic-section {
+            border: 2px dashed #3498db;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #e8f4fd;
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .instructions {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h3>🧪 Dynamic Form Test Page</h3>
+        <p><strong>This page tests the extension's ability to handle dynamic forms:</strong></p>
+        <ul>
+            <li>Fields that appear/disappear based on selections</li>
+            <li>Cascading dependencies (fields that show more fields)</li>
+            <li>Dynamic validation and enabling/disabling</li>
+            <li>Multiple passes to catch all newly visible elements</li>
+        </ul>
+        <p><strong>Test the extension:</strong> Watch how it fills fields in multiple passes as new elements become visible!</p>
+    </div>
+
+    <div class="form-container">
+        <h2>Dynamic Registration Form</h2>
+        <form name="dynamicRegistration">
+            <div class="form-group">
+                <label for="userType">User Type:</label>
+                <select id="userType" name="userType">
+                    <option value="">Select user type</option>
+                    <option value="individual">Individual</option>
+                    <option value="business">Business</option>
+                    <option value="organization">Organization</option>
+                </select>
+            </div>
+
+            <!-- Individual-specific fields -->
+            <div id="individualFields" class="hidden dynamic-section">
+                <h4>👤 Individual Information</h4>
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName">
+                </div>
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth:</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth">
+                </div>
+            </div>
+
+            <!-- Business-specific fields -->
+            <div id="businessFields" class="hidden dynamic-section">
+                <h4>🏢 Business Information</h4>
+                <div class="form-group">
+                    <label for="companyName">Company Name:</label>
+                    <input type="text" id="companyName" name="companyName">
+                </div>
+                <div class="form-group">
+                    <label for="taxId">Tax ID:</label>
+                    <input type="text" id="taxId" name="taxId">
+                </div>
+                <div class="form-group">
+                    <label for="businessType">Business Type:</label>
+                    <select id="businessType" name="businessType">
+                        <option value="">Select business type</option>
+                        <option value="corporation">Corporation</option>
+                        <option value="llc">LLC</option>
+                        <option value="partnership">Partnership</option>
+                        <option value="sole-proprietorship">Sole Proprietorship</option>
+                    </select>
+                </div>
+
+                <!-- Corporation-specific fields -->
+                <div id="corporationFields" class="hidden">
+                    <div class="form-group">
+                        <label for="stockSymbol">Stock Symbol:</label>
+                        <input type="text" id="stockSymbol" name="stockSymbol">
+                    </div>
+                    <div class="form-group">
+                        <label for="publicTraded">Publicly Traded:</label>
+                        <select id="publicTraded" name="publicTraded">
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Organization-specific fields -->
+            <div id="organizationFields" class="hidden dynamic-section">
+                <h4>🏛️ Organization Information</h4>
+                <div class="form-group">
+                    <label for="orgName">Organization Name:</label>
+                    <input type="text" id="orgName" name="orgName">
+                </div>
+                <div class="form-group">
+                    <label for="orgType">Organization Type:</label>
+                    <select id="orgType" name="orgType">
+                        <option value="">Select organization type</option>
+                        <option value="nonprofit">Non-Profit</option>
+                        <option value="government">Government</option>
+                        <option value="educational">Educational</option>
+                    </select>
+                </div>
+
+                <!-- Non-profit specific fields -->
+                <div id="nonprofitFields" class="hidden">
+                    <div class="form-group">
+                        <label for="ein">EIN (Tax Exempt Number):</label>
+                        <input type="text" id="ein" name="ein">
+                    </div>
+                    <div class="form-group">
+                        <label for="missionStatement">Mission Statement:</label>
+                        <textarea id="missionStatement" name="missionStatement" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common fields that appear after user type selection -->
+            <div id="commonFields" class="hidden dynamic-section">
+                <h4>📧 Contact Information</h4>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <select id="country" name="country">
+                        <option value="">Select country</option>
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="AU">Australia</option>
+                    </select>
+                </div>
+
+                <!-- Address fields that appear after country selection -->
+                <div id="addressFields" class="hidden">
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+                    <div class="form-group">
+                        <label for="zipCode">ZIP/Postal Code:</label>
+                        <input type="text" id="zipCode" name="zipCode">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final agreement section -->
+            <div id="agreementFields" class="hidden dynamic-section">
+                <h4>📋 Agreements</h4>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="termsAccepted" name="termsAccepted">
+                        I accept the terms and conditions
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="newsletterSubscribe" name="newsletterSubscribe">
+                        Subscribe to newsletter
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" disabled id="submitBtn">Submit Registration</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Dynamic form behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            const userType = document.getElementById('userType');
+            const businessType = document.getElementById('businessType');
+            const orgType = document.getElementById('orgType');
+            const country = document.getElementById('country');
+            const termsAccepted = document.getElementById('termsAccepted');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Show/hide sections based on user type
+            userType.addEventListener('change', function() {
+                // Hide all type-specific sections
+                document.getElementById('individualFields').classList.add('hidden');
+                document.getElementById('businessFields').classList.add('hidden');
+                document.getElementById('organizationFields').classList.add('hidden');
+                
+                // Show common fields for any selection
+                if (this.value) {
+                    document.getElementById('commonFields').classList.remove('hidden');
+                    
+                    // Show type-specific fields
+                    if (this.value === 'individual') {
+                        document.getElementById('individualFields').classList.remove('hidden');
+                    } else if (this.value === 'business') {
+                        document.getElementById('businessFields').classList.remove('hidden');
+                    } else if (this.value === 'organization') {
+                        document.getElementById('organizationFields').classList.remove('hidden');
+                    }
+                } else {
+                    document.getElementById('commonFields').classList.add('hidden');
+                }
+                
+                checkFormCompletion();
+            });
+
+            // Show corporation fields for corporations
+            businessType.addEventListener('change', function() {
+                if (this.value === 'corporation') {
+                    document.getElementById('corporationFields').classList.remove('hidden');
+                } else {
+                    document.getElementById('corporationFields').classList.add('hidden');
+                }
+            });
+
+            // Show nonprofit fields for nonprofits
+            orgType.addEventListener('change', function() {
+                if (this.value === 'nonprofit') {
+                    document.getElementById('nonprofitFields').classList.remove('hidden');
+                } else {
+                    document.getElementById('nonprofitFields').classList.add('hidden');
+                }
+            });
+
+            // Show address fields after country selection
+            country.addEventListener('change', function() {
+                if (this.value) {
+                    document.getElementById('addressFields').classList.remove('hidden');
+                    checkFormCompletion();
+                } else {
+                    document.getElementById('addressFields').classList.add('hidden');
+                }
+            });
+
+            // Check form completion to show agreement section
+            function checkFormCompletion() {
+                const hasUserType = userType.value !== '';
+                const hasCountry = country.value !== '';
+                
+                if (hasUserType && hasCountry) {
+                    document.getElementById('agreementFields').classList.remove('hidden');
+                }
+            }
+
+            // Enable submit button when terms are accepted
+            termsAccepted.addEventListener('change', function() {
+                submitBtn.disabled = !this.checked;
+            });
+
+            // Form submission
+            document.querySelector('form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Form submitted! (This is just a test)');
+            });
+        });
+
+        // Log field visibility changes for debugging
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('hidden')) {
+                        console.log('Section hidden:', target.id);
+                    } else {
+                        console.log('Section shown:', target.id);
+                    }
+                }
+            });
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ['class']
+        });
+    </script>
+</body>
+</html>

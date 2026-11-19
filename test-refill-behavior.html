@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Refill Behavior</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        form {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        input, select, textarea {
+            margin: 5px 0;
+            padding: 8px;
+            width: 200px;
+        }
+        .prefilled {
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <h2>🧪 Test "Only fill blank/empty" Behavior</h2>
+        <p><strong>Test Instructions:</strong></p>
+        <ol>
+            <li><strong>First test:</strong> Check "Only fill blank/empty" → Click Fill Forms → Should only fill empty fields</li>
+            <li><strong>Second test:</strong> Uncheck "Only fill blank/empty" → Click Fill Forms → Should replace ALL field values with new random data</li>
+        </ol>
+    </div>
+
+    <form id="testForm">
+        <h3>Mixed Form (Some Pre-filled)</h3>
+        <div>
+            <label>Empty Name: <input type="text" name="empty_name" placeholder="This is empty"></label>
+        </div>
+        <div>
+            <label>Pre-filled Name: <input type="text" name="prefilled_name" value="John Doe" class="prefilled"></label>
+        </div>
+        <div>
+            <label>Empty Email: <input type="email" name="empty_email" placeholder="This is empty"></label>
+        </div>
+        <div>
+            <label>Pre-filled Email: <input type="email" name="prefilled_email" value="john@example.com" class="prefilled"></label>
+        </div>
+        <div>
+            <label>Empty Country: 
+                <select name="empty_country">
+                    <option value="">Select Country</option>
+                    <option value="us">United States</option>
+                    <option value="ca">Canada</option>
+                    <option value="uk">United Kingdom</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label>Pre-filled Country: 
+                <select name="prefilled_country" class="prefilled">
+                    <option value="">Select Country</option>
+                    <option value="us" selected>United States</option>
+                    <option value="ca">Canada</option>
+                    <option value="uk">United Kingdom</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <label>Empty Comments: <br>
+                <textarea name="empty_comments" rows="3" cols="40" placeholder="This is empty"></textarea>
+            </label>
+        </div>
+        <div>
+            <label>Pre-filled Comments: <br>
+                <textarea name="prefilled_comments" rows="3" cols="40" class="prefilled">This is pre-filled content that should be replaced when "Only fill blank/empty" is unchecked.</textarea>
+            </label>
+        </div>
+    </form>
+
+    <script>
+        console.log('🧪 Test page loaded for refill behavior testing');
+        console.log('🧪 Pre-filled fields have yellow background');
+        console.log('🧪 Empty fields have normal background');
+    </script>
+</body>
+</html>
